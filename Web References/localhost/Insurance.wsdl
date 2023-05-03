@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="Insurance">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cn" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InsuranceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InsuranceResult" type="tns:ArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfAnyType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="anyType" nillable="true" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Fitness">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ln" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FitnessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FitnessResult" type="tns:ArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="InsuranceSoapIn">
+    <wsdl:part name="parameters" element="tns:Insurance" />
+  </wsdl:message>
+  <wsdl:message name="InsuranceSoapOut">
+    <wsdl:part name="parameters" element="tns:InsuranceResponse" />
+  </wsdl:message>
+  <wsdl:message name="FitnessSoapIn">
+    <wsdl:part name="parameters" element="tns:Fitness" />
+  </wsdl:message>
+  <wsdl:message name="FitnessSoapOut">
+    <wsdl:part name="parameters" element="tns:FitnessResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ValidationSoap">
+    <wsdl:operation name="Insurance">
+      <wsdl:input message="tns:InsuranceSoapIn" />
+      <wsdl:output message="tns:InsuranceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Fitness">
+      <wsdl:input message="tns:FitnessSoapIn" />
+      <wsdl:output message="tns:FitnessSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ValidationSoap" type="tns:ValidationSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Insurance">
+      <soap:operation soapAction="http://tempuri.org/Insurance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Fitness">
+      <soap:operation soapAction="http://tempuri.org/Fitness" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ValidationSoap12" type="tns:ValidationSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Insurance">
+      <soap12:operation soapAction="http://tempuri.org/Insurance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Fitness">
+      <soap12:operation soapAction="http://tempuri.org/Fitness" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Validation">
+    <wsdl:port name="ValidationSoap" binding="tns:ValidationSoap">
+      <soap:address location="https://localhost:44345/Insurance.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ValidationSoap12" binding="tns:ValidationSoap12">
+      <soap12:address location="https://localhost:44345/Insurance.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
